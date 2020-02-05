@@ -1,4 +1,4 @@
-package online.xybh.controller;
+package online.xybh.community.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
