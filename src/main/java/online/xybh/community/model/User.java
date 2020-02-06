@@ -17,4 +17,5 @@ public class User {
     private String bio;
     private Long gmtCreate;
     private Long gmtModified;
+    private String avatarUrl;
 }
