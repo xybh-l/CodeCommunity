@@ -1,0 +1,13 @@
+.main{
+    margin: 30px;
+    background: white;
+}
+
+body{
+    background: url("https://elasticsearch.cn/static/css/default/img/bg.jpg") repeat;
+}
+
+.btn-publish{
+    float: right;
+    margin-bottom: 20px;
+}
