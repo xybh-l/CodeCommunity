@@ -29,9 +29,24 @@ public class PublishController {
     private UserMapper userMapper;
 
     @GetMapping("/publish")
-    public String publish() {
+    public String publish(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        User user;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("token")) {
+                    String token = cookie.getValue();
+                    user = userMapper.findByToken(token);
+                    if (user != null) {
+                        request.getSession().setAttribute("user", user);
+                    }
+                    break;
+                }
+            }
+        }
         return "publish";
     }
+
 
     @PostMapping("/publish")
     public String doPublish(@RequestParam(value = "title") String title,
