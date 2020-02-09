@@ -1,24 +1,28 @@
-.main{
+.main {
     margin: 30px;
     background: white;
 }
 
-body{
+body {
     background: url("https://elasticsearch.cn/static/css/default/img/bg.jpg") repeat;
 }
 
-.btn-publish{
+.btn-publish {
     float: right;
     margin-bottom: 20px;
 }
 
-.media-object{
+.media-object {
     width: 40px;
     height: 40px;
 }
 
-.text-desc{
+.text-desc {
     font-size: 12px;
     font-weight: normal;
     color: #999999;
+}
+
+.profile .section {
+    margin-top: 15px;
 }

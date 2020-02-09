@@ -22,4 +22,10 @@ public interface QuestionMapper {
 
     @Select("select * from question order by gmt_create desc")
     List<Question> list();
+
+    @Select("select * from question where creator=#{userId} order by gmt_create desc")
+    List<Question> queryQuestionsById(String userId);
+
+    @Select("select * from question where id = #{id}")
+    Question getById(Integer id);
 }
