@@ -29,19 +29,15 @@ public class QuestionService {
 
     public List<Question> queryQuestions(Integer page, Integer size) {
         PageHelper.startPage(page, size);
-        return questionMapper.list();
+        List<Question> list = questionMapper.list();
+        return list;
     }
 
     public List<QuestionDTO> list(Integer page, Integer size) {
         List<Question> questions = queryQuestions(page, size);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questions) {
-            User user = null;
-            try{
-                user = userMapper.findById(question.getCreator()).get(0);
-            }catch (IndexOutOfBoundsException e){
-                continue;
-            }
+            User user = userMapper.findByAccountId(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question, questionDTO);
             questionDTO.setUser(user);
@@ -59,12 +55,7 @@ public class QuestionService {
         List<Question> questions = queryQuestions(userId, page, size);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questions) {
-            User user = null;
-            try{
-                user = userMapper.findById(question.getCreator()).get(0);
-            }catch (IndexOutOfBoundsException e){
-                continue;
-            }
+            User user = userMapper.findByAccountId(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question, questionDTO);
             questionDTO.setUser(user);
@@ -76,12 +67,8 @@ public class QuestionService {
     public QuestionDTO getById(Integer id) {
         Question question = questionMapper.getById(id);
         QuestionDTO questionDTO = new QuestionDTO();
-        BeanUtils.copyProperties(question,questionDTO);
-        User user = null;
-        try{
-            user = userMapper.findById(question.getCreator()).get(0);
-        }catch (IndexOutOfBoundsException ignored){
-        }
+        BeanUtils.copyProperties(question, questionDTO);
+        User user = userMapper.findByAccountId(question.getCreator());
         questionDTO.setUser(user);
         return questionDTO;
     }

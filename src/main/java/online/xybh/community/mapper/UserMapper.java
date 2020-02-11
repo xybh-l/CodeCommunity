@@ -1,10 +1,7 @@
 package online.xybh.community.mapper;
 
 import online.xybh.community.model.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,6 +21,9 @@ public interface UserMapper {
     @Select("select * from user where token=#{token}")
     User findByToken(@Param("token") String token);
 
-    @Select("select * from user where account_id=#{id}")
-    List<User> findById(@Param("id") String id);
+    @Select("select * from user where account_id=#{accountId}")
+    User findByAccountId(@Param("accountId") String accountId);
+
+    @Update("update user set name=#{name}, token=#{token}, gmt_modified=#{gmtModified}, avatar_url=#{avatarUrl} where id=#{id}")
+    void update(User user);
 }

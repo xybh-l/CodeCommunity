@@ -5,6 +5,7 @@ import online.xybh.community.dto.GithubUser;
 import online.xybh.community.mapper.UserMapper;
 import online.xybh.community.model.User;
 import online.xybh.community.provider.GithubProvider;
+import online.xybh.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -38,7 +39,7 @@ public class AuthorizeController {
     private String redirectUrl;
 
     @Autowired
-    private UserMapper mapper;
+    private UserService userService;
 
     @RequestMapping("/callback")
     public String callback(@RequestParam(name = "code") String code,
@@ -57,14 +58,11 @@ public class AuthorizeController {
             User user = new User();
             String token = UUID.randomUUID().toString();
             user.setToken(token);
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate());
             user.setName(githubUser.getName());
             user.setBio(githubUser.getBio());
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setAvatarUrl(githubUser.getAvatar_url());
-
-            mapper.insert(user);
+            userService.createOrUpdate(user);
             response.addCookie(new Cookie("token", token));
             return "redirect:/";
         } else {

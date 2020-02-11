@@ -23,7 +23,8 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${question.title}"></h4>
+                    <a th:href="@{'question/'+${question.id}}"><h4 class="media-heading"
+                                                                   th:text="${question.title}"></h4></a>
                     <span th:text="${question.description}"></span><br>
                     <span class="text-desc">
                  <span th:text="${question.commentCount}"></span> 个回复 · <span th:text="${question.viewCount}"></span>次浏览 · <span
@@ -34,18 +35,32 @@
             <nav aria-label="Page navigation">
                 <ul class="pagination" style="float:right;">
                     <li>
-                        <a th:href="@{/(page=${pageInfo.getPrePage()})}" aria-label="Previous" th:if="${pageInfo.hasPreviousPage}">
+                        <a th:href="@{/(page=${pageInfo.getPrePage()})}" aria-label="Previous"
+                           th:if="${pageInfo.hasPreviousPage}">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li th:if="${pageInfo.pageNum} - 3 <= 0 and ${pageInfo.pageNum} + 3 <= ${pageInfo.pages}" th:class="${page==pageInfo.pageNum}?'active':''" th:each="page:${#numbers.sequence(1, pageInfo.pageNum + 3)}"><a th:href="@{/(page=${page})}" th:text="${page}"></a></li>
-                    <li th:if="${pageInfo.pageNum} - 3 <= 0 and ${pageInfo.pageNum} + 3 > ${pageInfo.pages}" th:class="${page==pageInfo.pageNum}?'active':''" th:each="page:${#numbers.sequence(1, pageInfo.pages)}"><a th:href="@{/(page=${page})}" th:text="${page}"></a></li>
-                    <li th:if="${pageInfo.pageNum} - 3 > 0 and ${pageInfo.pageNum} + 3 <= ${pageInfo.pages}" th:class="${page==pageInfo.pageNum}?'active':''" th:each="page:${#numbers.sequence(pageInfo.pageNum - 3, pageInfo.pageNum + 3)}"><a th:href="@{/(page=${page})}" th:text="${page}"></a></li>
-                    <li th:if="${pageInfo.pageNum} - 3 > 0 and ${pageInfo.pageNum} + 3 > ${pageInfo.pages}" th:class="${page==pageInfo.pageNum}?'active':''" th:each="page:${#numbers.sequence(pageInfo.pageNum - 3, pageInfo.pages)}"><a th:href="@{/(page=${page})}" th:text="${page}"></a></li>
-<!--                    <li th:if="${pageInfo.pageNum} + 3 >= ${pageInfo.pages}" th:class="${page==pageInfo.pageNum}?'active':''" th:each="page:${#numbers.sequence(pageInfo.pageNum - 3, pageInfo.pages)}"><a th:href="@{/(page=${page})}" th:text="${page}"></a></li>-->
-<!--                    <li th:class="${page==pageInfo.pageNum}?'active':''" th:each="page:${#numbers.sequence(1, pageInfo.getPages())}"><a th:href="@{/(page=${page})}" th:text="${page}"></a></li>-->
+                    <li th:if="${pageInfo.pageNum} - 3 <= 0 and ${pageInfo.pageNum} + 3 <= ${pageInfo.pages}"
+                        th:class="${page==pageInfo.pageNum}?'active':''"
+                        th:each="page:${#numbers.sequence(1, pageInfo.pageNum + 3)}"><a th:href="@{/(page=${page})}"
+                                                                                        th:text="${page}"></a></li>
+                    <li th:if="${pageInfo.pageNum} - 3 <= 0 and ${pageInfo.pageNum} + 3 > ${pageInfo.pages}"
+                        th:class="${page==pageInfo.pageNum}?'active':''"
+                        th:each="page:${#numbers.sequence(1, pageInfo.pages)}"><a th:href="@{/(page=${page})}"
+                                                                                  th:text="${page}"></a></li>
+                    <li th:if="${pageInfo.pageNum} - 3 > 0 and ${pageInfo.pageNum} + 3 <= ${pageInfo.pages}"
+                        th:class="${page==pageInfo.pageNum}?'active':''"
+                        th:each="page:${#numbers.sequence(pageInfo.pageNum - 3, pageInfo.pageNum + 3)}"><a
+                            th:href="@{/(page=${page})}" th:text="${page}"></a></li>
+                    <li th:if="${pageInfo.pageNum} - 3 > 0 and ${pageInfo.pageNum} + 3 > ${pageInfo.pages}"
+                        th:class="${page==pageInfo.pageNum}?'active':''"
+                        th:each="page:${#numbers.sequence(pageInfo.pageNum - 3, pageInfo.pages)}"><a
+                            th:href="@{/(page=${page})}" th:text="${page}"></a></li>
+                    <!--                    <li th:if="${pageInfo.pageNum} + 3 >= ${pageInfo.pages}" th:class="${page==pageInfo.pageNum}?'active':''" th:each="page:${#numbers.sequence(pageInfo.pageNum - 3, pageInfo.pages)}"><a th:href="@{/(page=${page})}" th:text="${page}"></a></li>-->
+                    <!--                    <li th:class="${page==pageInfo.pageNum}?'active':''" th:each="page:${#numbers.sequence(1, pageInfo.getPages())}"><a th:href="@{/(page=${page})}" th:text="${page}"></a></li>-->
                     <li>
-                        <a th:href="@{/(page=${pageInfo.getNextPage()})}" aria-label="Next" th:if="${pageInfo.hasNextPage}">
+                        <a th:href="@{/(page=${pageInfo.getNextPage()})}" aria-label="Next"
+                           th:if="${pageInfo.hasNextPage}">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
