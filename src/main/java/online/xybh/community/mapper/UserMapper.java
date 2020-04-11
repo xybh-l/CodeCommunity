@@ -1,29 +1,32 @@
 package online.xybh.community.mapper;
 
+import java.util.List;
 import online.xybh.community.model.User;
-import org.apache.ibatis.annotations.*;
+import online.xybh.community.model.UserExample;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-/**
- * @Author: XYBH
- * @Description:
- * @Date: Created in 2020/2/6 0006 1:33
- * @Modified:
- */
-@Mapper
 @Repository
 public interface UserMapper {
-    @Insert("insert into user(name, account_id, token, gmt_create, gmt_modified, bio,avatar_url) values(#{name},#{accountId},#{token},#{gmtCreate},#{gmtModified},#{bio},#{avatarUrl})")
-    void insert(User user);
+    long countByExample(UserExample example);
 
-    @Select("select * from user where token=#{token}")
-    User findByToken(@Param("token") String token);
+    int deleteByExample(UserExample example);
 
-    @Select("select * from user where account_id=#{accountId}")
-    User findByAccountId(@Param("accountId") String accountId);
+    int deleteByPrimaryKey(Long id);
 
-    @Update("update user set name=#{name}, token=#{token}, gmt_modified=#{gmtModified}, avatar_url=#{avatarUrl} where id=#{id}")
-    void update(User user);
+    int insert(User record);
+
+    int insertSelective(User record);
+
+    List<User> selectByExample(UserExample example);
+
+    User selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
+
+    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
 }

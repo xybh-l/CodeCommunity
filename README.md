@@ -16,6 +16,8 @@
 
 [Spring文档](https://sping.io/docs)
 
+[Mybatis generator](http://mybatis.github.io/generator/)
+
 ## 工具
 
 [git](https://git-scm.com/download)
@@ -56,4 +58,9 @@ CREATE TABLE `question` (
   `tag` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+```
+
+```
+    mvn flyway:migrate
+    mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
 ```

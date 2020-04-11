@@ -1,7 +1,6 @@
 package online.xybh.community.controller;
 
 import online.xybh.community.dto.QuestionDTO;
-import online.xybh.community.mapper.QuestionMapper;
 import online.xybh.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,9 +21,11 @@ public class QuestionController {
     private QuestionService questionService;
 
     @GetMapping("question/{id}")
-    public String question(@PathVariable(name = "id") Integer id,
+    public String question(@PathVariable(name = "id") Long id,
                            Model model){
         QuestionDTO questionDTO = questionService.getById(id);
+        //累加阅读数
+        questionService.incView(id);
         model.addAttribute("question",questionDTO);
         return "question";
     }

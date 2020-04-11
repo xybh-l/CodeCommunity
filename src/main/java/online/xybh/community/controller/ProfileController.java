@@ -40,9 +40,9 @@ public class ProfileController {
         if ("questions".equals(action)) {
             model.addAttribute("section", "questions");
             model.addAttribute("sectionName", "我的提问");
-            List<Question> questions = questionService.queryQuestions(user.getAccountId(), page, size);
+            List<Question> questions = questionService.queryQuestions(user.getId(), page, size);
             PageInfo pageInfo = new PageInfo(questions);
-            List<QuestionDTO> questionDTOList = questionService.list(user.getAccountId(), page, size);
+            List<QuestionDTO> questionDTOList = questionService.list(user.getId(), page, size);
             model.addAttribute("pageInfo", pageInfo);
             model.addAttribute("questions", questionDTOList);
         } else if ("replies".equals(action)) {

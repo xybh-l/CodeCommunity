@@ -4,12 +4,14 @@ import com.github.pagehelper.PageInfo;
 import online.xybh.community.dto.QuestionDTO;
 import online.xybh.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -24,6 +26,9 @@ public class IndexController {
     @Autowired
     private QuestionService questionService;
 
+    @Value("${qq.redirect.url}")
+    private String redirectUrl;
+
     @RequestMapping("/")
     public String index(HttpServletRequest request,
                         Model model,
@@ -32,6 +37,7 @@ public class IndexController {
         List<QuestionDTO> questionList = questionService.list(page, size);
 //        List<Question> list = questionService.list(page, size);
         PageInfo pageInfo = new PageInfo(questionService.queryQuestions(page, size));
+        model.addAttribute("redirect_uri", URLEncoder.encode(redirectUrl));
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("questions",questionList);
         return "index";

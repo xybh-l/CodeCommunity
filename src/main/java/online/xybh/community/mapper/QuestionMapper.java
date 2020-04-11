@@ -1,31 +1,32 @@
 package online.xybh.community.mapper;
 
+import java.util.List;
 import online.xybh.community.model.Question;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import online.xybh.community.model.QuestionExample;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-/**
- * @Author: XYBH
- * @Description: 发布问题Mapper类
- * @Date: Created in 2020/2/6 0006 22:31
- * @Modified:
- */
-@Mapper
 @Repository
 public interface QuestionMapper {
-    @Insert("insert into question(title,description,gmt_create,gmt_modified,creator,tag) values (#{title},#{description},#{gmtCreate},#{gmtModified},#{creator},#{tag})")
-    void create(Question question);
+    long countByExample(QuestionExample example);
 
-    @Select("select * from question order by gmt_create desc")
-    List<Question> list();
+    int deleteByExample(QuestionExample example);
 
-    @Select("select * from question where creator=#{userId} order by gmt_create desc")
-    List<Question> queryQuestionsById(String userId);
+    int deleteByPrimaryKey(Long id);
 
-    @Select("select * from question where id = #{id}")
-    Question getById(Integer id);
+    int insert(Question record);
+
+    int insertSelective(Question record);
+
+    List<Question> selectByExample(QuestionExample example);
+
+    Question selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") Question record, @Param("example") QuestionExample example);
+
+    int updateByExample(@Param("record") Question record, @Param("example") QuestionExample example);
+
+    int updateByPrimaryKeySelective(Question record);
+
+    int updateByPrimaryKey(Question record);
 }
